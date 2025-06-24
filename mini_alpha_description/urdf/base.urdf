@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+
+<robot name="mini_alpha">
+   <link name="nose_tip_link">
+        <!-- <visual>
+            <origin xyz="00.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <mesh filename="package://alpha_rise_description/mesh/alpha_rise_rviz.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual> -->
+    </link>
+
+    
+    <link name="base_link"/>
+    <joint name="base_link" type="fixed">
+        <origin xyz="-0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <parent link="base_link"/>
+        <child link="nose_tip_link"/>
+    </joint>
+
+    <link name="cg_link"/>
+    <joint name="cg_joint" type="fixed">
+        <origin xyz="0.0 0.0 0.0" rpy="3.1415926 0.0 0.0"/>
+        <parent link="base_link"/>
+        <child link="cg_link"/>
+    </joint>
+
+    <link name="cb_link"/>
+    <joint name="cb_joint" type="fixed">
+        <origin xyz="0.0 0.0 0.02" rpy="3.1415926 0.0 0.0"/>
+        <parent link="base_link"/>
+        <child link="cb_link"/>
+    </joint>
+
+    <link name="imu"/>
+    <joint name="imu_joint" type="fixed">
+        <origin xyz="0.0 -0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <parent link="base_link"/>
+        <child link="imu"/>
+    </joint>
+
+    <link name="imu_sf"/>
+    <joint name="imu__sf_joint" type="fixed">
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <parent link="base_link"/>
+        <child link="imu_sf"/>
+    </joint>
+
+    <link name="pressure"/>
+    <joint name="pressure_joint" type="fixed">
+        <origin xyz="-0.3 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <parent link="base_link"/>
+        <child link="pressure"/>
+    </joint>
+
+    <!-- thrusters -->
+
+    <link name="heave_port_thruster_link"/>
+    <joint name="heave_port_thruster_joint" type="fixed">
+        <origin xyz="-0.381 0.11 0.0" rpy="0.0 1.5717 0.0"/>
+        <parent link="base_link"/>
+        <child link="heave_port_thruster_link"/>
+    </joint>
+
+    <link name="heave_starboard_thruster_link"/>
+    <joint name="heave_starboard_thruster_joint" type="fixed">
+        <origin xyz="-0.381 -0.11 0.0" rpy="0.0 1.5717 0.0"/>
+        <parent link="base_link"/>
+        <child link="heave_starboard_thruster_link"/>
+    </joint>
+
+   
+    <link name="surge_port_thruster_link"/>
+    <joint name="surge_port_thruster_joint" type="fixed">
+        <origin xyz="-0.53 0.11 0.0" rpy="0.0 0.0 0.0"/>
+        <parent link="base_link"/>
+        <child link="surge_port_thruster_link"/>
+    </joint>
+
+
+    <link name="surge_starboard_thruster_link"/>
+    <joint name="surge_starboard_thruster_joint" type="fixed">
+        <origin xyz="-0.53 -0.11 0.0" rpy="0.0 0.0 0.0"/>
+        <parent link="base_link"/>
+        <child link="surge_starboard_thruster_link"/>
+    </joint>
+
+</robot>

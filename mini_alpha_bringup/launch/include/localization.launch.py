@@ -32,15 +32,15 @@ def generate_launch_description():
             parameters=[localization_param_file],
            ),
 
-        Node(
-            package='mvp_localization_utilities',
-            executable='zero_odom_publisher',
-            name='zero_odom_publisher',
-            namespace=robot_name,
-            # output='screen',
-            parameters=[{'frame_id' : robot_name + '/odom'},
-                        {'child_frame_id': robot_name +'/base_link'}]
-           ),
+        # Node(
+        #     package='mvp_localization_utilities',
+        #     executable='zero_odom_publisher',
+        #     name='zero_odom_publisher',
+        #     namespace=robot_name,
+        #     # output='screen',
+        #     parameters=[{'frame_id' : robot_name + '/odom'},
+        #                 {'child_frame_id': robot_name +'/base_link'}]
+        #    ),
 
 
 ])

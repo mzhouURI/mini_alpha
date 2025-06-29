@@ -8,7 +8,7 @@
     no_pwm_timeout: 10.0
   
     thruster_ch_list: [0, 1, 12, 13]
-    thruster_topic_list: [surge_starboard, heave_starboard, heave_port, surge_port]
+    thruster_topic_list: [control/thruster/surge_stbd, control/thruster/heave_starboard, control/thruster/heave_port, control/thruster/surge_port]
     thruster_min_us: [1100, 1100, 1100, 1100]
     thruster_max_us: [1900, 1900, 1900, 1900]
     thruster_init_us: [1500, 1500, 1500, 1500]

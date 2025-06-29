@@ -4,5 +4,5 @@
     controller_frequency: 10.0
     enabled: false
     child_link_initial: cg_link
-    world_link_initial: world_ned
+    world_link_initial: world
     controller_no_setpoint_timeout: 10.0

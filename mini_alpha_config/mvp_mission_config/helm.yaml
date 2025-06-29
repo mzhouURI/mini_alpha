@@ -1,7 +1,6 @@
 finite_state_machine:
 
   start:
-    initial: true
     control_mode: idle
     transitions: [kill, teleop]
   
@@ -10,6 +9,7 @@ finite_state_machine:
     transitions: [start]
 
   teleop:
+    initial: true
     control_mode: teleop
     transitions: [start, kill] 
     

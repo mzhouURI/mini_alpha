@@ -26,16 +26,16 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
-        # Node(
-        #     package='xsens_mti_ros2_driver',
-        #     namespace=robot_name,
-        #     executable='xsens_mti_node',
-        #     name='xsens_mti_node',
-        #     prefix=['stdbuf -o L'],
-        #     output="screen",
-        #     parameters=[xsens_parameters_file],
-        #     emulate_tty=True
-        # ),
+        Node(
+            package='xsens_mti_ros2_driver',
+            namespace=robot_name,
+            executable='xsens_mti_node',
+            name='xsens_mti_node',
+            prefix=['stdbuf -o L'],
+            output="screen",
+            parameters=[xsens_parameters_file],
+            emulate_tty=True
+        ),
         Node(
             package='bluerobotics_pressure',
             executable='bluerobotics_pressure_node',

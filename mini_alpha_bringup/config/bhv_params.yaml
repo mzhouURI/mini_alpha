@@ -1,5 +1,5 @@
 bhv_teleop:
-  default_bhv_world_link: world
+  default_bhv_world_link: world_ned
   default_bhv_child_link: cg_link
   ####tele-op, ang in degrees####
   ##left up/down controls surge
@@ -13,4 +13,5 @@ bhv_teleop:
   tele_d_yaw: 10.0 
   tele_d_pitch: 10.0
   tele_d_depth: 0.5
+  tele_desired_roll: 3.1415926
   no_joy_timeout: 500.0

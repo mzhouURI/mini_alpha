@@ -1,4 +1,9 @@
 finite_state_machine:
+  
+  teleop:
+    initial: true
+    control_mode: teleop
+    transitions: [start, kill] 
 
   start:
     control_mode: idle
@@ -8,16 +13,11 @@ finite_state_machine:
     control_mode: idle
     transitions: [start]
 
-  teleop:
-    initial: true
-    control_mode: teleop
-    transitions: [start, kill] 
-    
 
 behaviors:
 
   bhv_teleop:
     plugin: helm/Teleoperation
     priority:
-      teleop: 1
+      teleop: 2
   

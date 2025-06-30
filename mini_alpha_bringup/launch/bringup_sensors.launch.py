@@ -1,58 +1,68 @@
 import os
+
 from ament_index_python.packages import get_package_share_directory
+from launch import LaunchDescription
+from launch.actions import IncludeLaunchDescription
+from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch.actions import IncludeLaunchDescription
+
+from launch_xml.launch_description_sources import XMLLaunchDescriptionSource
 
 from launch import LaunchDescription
 from launch_ros.actions import Node
 
 def generate_launch_description():
-    robot_name = 'mini_alpha'
-    robot_bringup = robot_name + '_bringup'
+    arg_robot_name = 'mini_alpha'
+    robot_bringup = arg_robot_name + '_bringup'
 
-    xsens_parameters_file = os.path.join(
-        get_package_share_directory(robot_bringup), 
-        'config', 
-        'xsens.yaml')
 
-    presure_parameters = os.path.join(
-        get_package_share_directory(robot_bringup),
-        'config',
-        'bluerobotics_bar30.yaml'
+    foxglove = IncludeLaunchDescription(
+        XMLLaunchDescriptionSource(
+            os.path.join(
+                get_package_share_directory('foxglove_bridge'),
+                'launch/foxglove_bridge_launch.xml')),
+        launch_arguments={
+            'namespace': arg_robot_name,
+            'delay': '0.0'
+        }.items()
     )
 
-    power_moinitor_param = os.path.join(
-        get_package_share_directory(robot_bringup),
-        'config',
-        'power_monitor.yaml'
+    xsens = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(
+                get_package_share_directory(robot_bringup), 
+                'launch','include','xsens.launch.py')),
+        launch_arguments = {
+            'arg_robot_name': arg_robot_name,
+            'delay': '2.0'
+            }.items()  
+    )
+
+    pressure = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(
+                get_package_share_directory(robot_bringup), 
+                'launch','include','pressure_sensor.launch.py')),
+        launch_arguments = {
+            'arg_robot_name': arg_robot_name,
+            'delay': '4.0'
+            }.items()  
+    )
+
+    power = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(
+                get_package_share_directory(robot_bringup), 
+                'launch','include','power_monitor.launch.py')),
+        launch_arguments = {
+            'arg_robot_name': arg_robot_name,
+            'delay': '6.0'
+            }.items()  
     )
 
     return LaunchDescription([
-        Node(
-            package='xsens_mti_ros2_driver',
-            namespace=robot_name,
-            executable='xsens_mti_node',
-            name='xsens_mti_node',
-            prefix=['stdbuf -o L'],
-            output="screen",
-            parameters=[xsens_parameters_file],
-            emulate_tty=True
-        ),
-        Node(
-            package='bluerobotics_pressure',
-            executable='bluerobotics_pressure_node',
-            name='bluerobotics_pressure_node',
-            namespace=robot_name,
-            output='screen',
-            parameters=[presure_parameters]        
-        ),
-
-        Node(
-            package='power_monitor',
-            executable='power_monitor_node',
-            name='power_monitor_node',
-            namespace=robot_name,
-            output='screen',
-            parameters=[power_moinitor_param]        
-        )
-
-       
+        # foxglove,
+        xsens,
+        pressure,
+        power
     ])

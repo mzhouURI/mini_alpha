@@ -5,11 +5,14 @@ from launch import LaunchDescription
 from launch_ros.actions import Node
 from launch.substitutions import LaunchConfiguration
 from launch.actions import TimerAction
+from launch.substitutions import PythonExpression
 
 
 def generate_launch_description():
     robot_name = 'mini_alpha'
     robot_bringup = robot_name + '_bringup'
+    delay = LaunchConfiguration('delay')
+
     robot_config = robot_name + '_config'
     robot_param_path = os.path.join(
         get_package_share_directory(robot_bringup),
@@ -24,7 +27,8 @@ def generate_launch_description():
 
     return LaunchDescription([
 
-        TimerAction(period=5.0,
+        TimerAction(
+            period=PythonExpression([delay]),
             actions=[
                     Node(
                         package="mvp_control",

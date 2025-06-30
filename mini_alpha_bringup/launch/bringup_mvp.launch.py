@@ -16,11 +16,6 @@ def generate_launch_description():
     arg_robot_name = 'mini_alpha'
     robot_bringup = arg_robot_name + '_bringup'
 
-    # simulation
-    simulation = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([os.path.join(get_package_share_directory(robot_bringup), 'launch','include','simulation.launch.py')]),
-        launch_arguments = {'robot_name': arg_robot_name}.items()    
-    )
 
     #description URDF
     description = IncludeLaunchDescription(
@@ -28,42 +23,36 @@ def generate_launch_description():
         launch_arguments = {'arg_robot_name': arg_robot_name}.items()  
     )
 
-    foxglove = IncludeLaunchDescription(
-        XMLLaunchDescriptionSource(
-            os.path.join(
-                get_package_share_directory('foxglove_bridge'),
-                'launch/foxglove_bridge_launch.xml')),
-        launch_arguments={
-            'namespace': arg_robot_name
-        }.items()
-    )
-
     # # robot localization
     localization = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([os.path.join(get_package_share_directory(robot_bringup), 'launch','include','localization.launch.py')]),
-        launch_arguments = {'arg_robot_name': arg_robot_name}.items()  
+        launch_arguments = {
+            'arg_robot_name': arg_robot_name,
+            'delay': '2.0'
+            }.items()  
     )
 
     #mvp_control
     mvp_control = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([os.path.join(get_package_share_directory(robot_bringup), 'launch','include','mvp_control.launch.py')]),
-        launch_arguments = {'arg_robot_name': arg_robot_name}.items()  
+        launch_arguments = {
+            'arg_robot_name': arg_robot_name,
+            'delay': '5.0'
+            }.items()  
     )
 
      #mvp_mission
     mvp_mission = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([os.path.join(get_package_share_directory(robot_bringup), 'launch','include','mvp_mission.launch.py')]),
-        launch_arguments = {'arg_robot_name': arg_robot_name}.items()  
+        launch_arguments = {
+            'arg_robot_name': arg_robot_name,
+            'delay': '10.0'
+            }.items()  
     )
 
-
-    # #joy
-    joy = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([os.path.join(get_package_share_directory(robot_bringup), 'launch','include','teleop_joy.launch.py')]),
-        launch_arguments = {'arg_robot_name': arg_robot_name}.items()  
-    )
 
     return LaunchDescription([
+        description,
         localization,
         mvp_control,
         mvp_mission,

@@ -23,15 +23,9 @@ def generate_launch_description():
     # rviz_config_dir = os.path.join( get_package_share_directory('race2_auv_robot_description'), 'config', 'config.rviz' )
     with open(path_to_urdf, 'r') as infp:
         robot_desc = infp.read()
-
+    
 
     return LaunchDescription([
-        # Node(
-        #     package='rviz2',
-        #     executable='rviz2',
-        #     name='rviz2',
-        #     # arguments=['-d', [rviz_config_dir]],
-        # ),
         
         Node(
             package='robot_state_publisher',
@@ -41,9 +35,6 @@ def generate_launch_description():
             # output='screen',
             parameters=[{'robot_description' : robot_desc},
                         {'frame_prefix': robot_name +'/'}],
-            # remappings=[
-            #         ('joint_states', 'stonefish/servo/joint_states'),
-            #     ],
            ),
 
         Node(

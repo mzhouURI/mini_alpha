@@ -12,6 +12,6 @@ bhv_teleop:
   tele_s_sway: 1.0
   tele_d_yaw: 10.0 
   tele_d_pitch: 10.0
-  tele_d_depth: 0.5
-  tele_desired_roll: 3.1415926
+  tele_d_depth: 0.1
+  tele_desired_roll: 0.0
   no_joy_timeout: 500.0

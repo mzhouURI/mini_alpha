@@ -2,9 +2,9 @@ control_modes:
   idle: false
 
   teleop:
-    z:        {p: 20.0,    i: 2.0 ,  d: 5.0,  pid_max: 15, pid_min: -15}
+    z:        {p: 20.0,    i: 2.0 ,  d: 5.0,  pid_max: 10, pid_min: -10}
     pitch:    {p: 10.0,   i: 0.5,  d: 2.0,  pid_max: 10, pid_min: -10}
-    roll:     {p: 2.0,   i: 0.0,  d: 5.0,  pid_max: 5, pid_min: -5}
+    roll:     {p: 1.0,   i: 0.0,  d: 1.0,  pid_max: 5, pid_min: -5}
 
 
 thruster_ids:
@@ -13,14 +13,14 @@ thruster_ids:
     control_tf: heave_port_thruster_link
     command_topic: control/thruster/heave_port
     force_topic: control/force/heave_port
-    limits: [-8.0, 8.0] #[min, max]
-    delta_limit: 1.0
+    limits: [-5.0, 5.0] #[min, max]
+    delta_limit: 0.1
     polynomials: [0.0, 5.0277, 0.98, 4.7723]
 
   heave_starboard:
     control_tf: heave_starboard_thruster_link
     command_topic: control/thruster/heave_stbd
     force_topic: control/force/heave_starboard
-    limits: [-8.0, 8.0] #[min, max]
-    delta_limit: 1.0
+    limits: [-5.0, 5.0] #[min, max]
+    delta_limit: 0.1
     polynomials: [0.0, 5.0277, 0.98, 4.7723]

@@ -28,7 +28,10 @@ def generate_launch_description():
         prefix=['stdbuf -o L'],
         output="screen",
         parameters=[xsens_parameters_file],
-        emulate_tty=True
+        emulate_tty=True,
+        remappings=[
+                ('~/imu/data', 'imu/data')
+            ]   
     )
     return LaunchDescription([
         TimerAction(

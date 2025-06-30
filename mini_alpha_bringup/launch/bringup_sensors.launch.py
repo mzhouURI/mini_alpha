@@ -23,7 +23,7 @@ def generate_launch_description():
                 'launch/foxglove_bridge_launch.xml')),
         launch_arguments={
             'namespace': arg_robot_name,
-            'delay': '0.0'
+            'delay': '1.0'
         }.items()
     )
 
@@ -60,9 +60,21 @@ def generate_launch_description():
             }.items()  
     )
 
+    camera = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(
+                get_package_share_directory(robot_bringup), 
+                'launch','include','camera.launch.py')),
+        launch_arguments = {
+            'arg_robot_name': arg_robot_name,
+            'delay': '10.0'
+            }.items()  
+    )
+
     return LaunchDescription([
         foxglove,
         xsens,
         pressure,
-        power
+        power,
+        # camera
     ])

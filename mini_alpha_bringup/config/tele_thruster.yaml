@@ -14,6 +14,6 @@
     single_surge_topic: 'surge/thruster'
     
     # Differential Surge Config
-    differential_surge_map_coeff: 0.8
+    differential_surge_map_coeff: 0.2
     port_surge_topic: 'control/thruster/surge_port'
     starboard_surge_topic: 'control/thruster/surge_stbd'

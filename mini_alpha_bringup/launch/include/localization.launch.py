@@ -32,10 +32,23 @@ def generate_launch_description():
         parameters=[localization_param_file],
     )
 
+    node2 = Node(
+        package='mvp_localization_utilities',
+        executable='zero_odom_publisher',
+        name='zero_odom_publisher',
+        namespace=robot_name,
+        # output='screen',
+        parameters=[
+            {'frame_id': robot_name + '/odom'},
+            {'child_frame_id': robot_name + '/base_link'},
+
+        ],
+    )
+
 
     return LaunchDescription([
         TimerAction(
             period=PythonExpression([delay]),
-            actions=[node]
+            actions=[node, node2]
         ),
 ])

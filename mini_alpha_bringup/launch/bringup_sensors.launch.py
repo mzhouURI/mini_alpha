@@ -76,5 +76,5 @@ def generate_launch_description():
         xsens,
         pressure,
         power,
-        # camera
+        camera
     ])
